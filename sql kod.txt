@@ -1,0 +1,106 @@
+-- Database generated with pgModeler (PostgreSQL Database Modeler).
+-- pgModeler  version: 0.9.3
+-- PostgreSQL version: 13.0
+-- Project Site: pgmodeler.io
+-- Model Author: ---
+
+-- Database creation must be performed outside a multi lined SQL file. 
+-- These commands were put in this file only as a convenience.
+-- 
+-- object: new_database | type: DATABASE --
+-- DROP DATABASE IF EXISTS new_database;
+CREATE DATABASE new_database;
+-- ddl-end --
+
+
+-- object: public.person | type: TABLE --
+-- DROP TABLE IF EXISTS public.person CASCADE;
+CREATE TABLE public.person (
+	first_name varchar(100) NOT NULL,
+	middle_name varchar(75),
+	last_name varchar(100),
+	sex varchar(5),
+	date_of_birth date,
+	marital_status varchar(25),
+	name_of_vaccine_vaccination varchar(100),
+	CONSTRAINT person_pk PRIMARY KEY (first_name)
+
+);
+-- ddl-end --
+ALTER TABLE public.person OWNER TO postgres;
+-- ddl-end --
+
+-- object: public.adress | type: TABLE --
+-- DROP TABLE IF EXISTS public.adress CASCADE;
+CREATE TABLE public.adress (
+	city_name varchar(50),
+	street varchar(50),
+	zip varchar(10),
+	floor varchar(2),
+	apartment varchar(25),
+	descriptive_number varchar(10),
+	oriantation_number varchar(35),
+	first_name_person varchar(100)
+);
+
+-- ddl-end --
+ALTER TABLE public.adress OWNER TO postgres;
+-- ddl-end --
+
+-- object: public.vaccination | type: TABLE --
+-- DROP TABLE IF EXISTS public.vaccination CASCADE;
+CREATE TABLE public.vaccination (
+	name_of_vaccine varchar(100) NOT NULL,
+	first_dose_date date,
+	second_dose_date date,
+	booster_shot bool,
+	boster_shot_date date,
+	CONSTRAINT vaccination_pk PRIMARY KEY (name_of_vaccine)
+
+);
+
+-- ddl-end --
+ALTER TABLE public.vaccination OWNER TO postgres;
+-- ddl-end --
+
+-- object: public.contacts | type: TABLE --
+-- DROP TABLE IF EXISTS public.contacts CASCADE;
+CREATE TABLE public.contacts (
+	facebook varchar(100),
+	instagram varchar(100),
+	email varchar(50),
+	phone varchar(15),
+	first_name_person varchar(100)
+);
+
+-- ddl-end --
+ALTER TABLE public.contacts OWNER TO postgres;
+-- ddl-end --
+
+-- object: vaccination_fk | type: CONSTRAINT --
+-- ALTER TABLE public.person DROP CONSTRAINT IF EXISTS vaccination_fk CASCADE;
+ALTER TABLE public.person ADD CONSTRAINT vaccination_fk FOREIGN KEY (name_of_vaccine_vaccination)
+REFERENCES public.vaccination (name_of_vaccine) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: person_uq | type: CONSTRAINT --
+-- ALTER TABLE public.person DROP CONSTRAINT IF EXISTS person_uq CASCADE;
+ALTER TABLE public.person ADD CONSTRAINT person_uq UNIQUE (name_of_vaccine_vaccination);
+-- ddl-end --
+
+-- object: person_fk | type: CONSTRAINT --
+-- ALTER TABLE public.adress DROP CONSTRAINT IF EXISTS person_fk CASCADE;
+ALTER TABLE public.adress ADD CONSTRAINT person_fk FOREIGN KEY (first_name_person)
+REFERENCES public.person (first_name) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: person_fk | type: CONSTRAINT --
+-- ALTER TABLE public.contacts DROP CONSTRAINT IF EXISTS person_fk CASCADE;
+ALTER TABLE public.contacts ADD CONSTRAINT person_fk FOREIGN KEY (first_name_person)
+REFERENCES public.person (first_name) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+
