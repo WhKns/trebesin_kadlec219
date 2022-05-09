@@ -1,0 +1,78 @@
+\documentclass[12pt,a4paper,notitlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\begin{document}
+
+\title{Databáze očkovaných osob}
+\author{ "Bubník, Kadlec V., Kadlec D., Wierer" }
+\date{10. 11. 2021}
+\maketitle
+
+\begin{abstract}
+Tento dokument byl vypracovaný společně se všemi členy týmu a ověřuje základní znalosti \LaTeX{}, databází a projektového řízení.
+
+Tým pracoval samostatně a využíval všechny dostupné materiály na Moodle nebo internetu. Veškeré licenční a právní náležitosti jsou upraveny v tomto dokumentu.
+
+Těm, který není tento dokument určen nemají žádné právo na využití obsahu tohoto dokumentu.
+
+Veškerá data osob a předmětů jsou smyšlená a nezakládají se na skutečnosti.
+\end{abstract}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+
+\section{Popis databáze}
+Databáze obsahuje údaje o očkovaných osobách. Zároveň jsou údaje o očkování první/druhou dávkou a popřípadě mají třetí dávku neboli booster shot.
+
+Databáze je vytvořena na jazyce MySQL a využívá veškeré technologické vlastnosti této DB.
+
+
+
+\newpage
+\section{Licenční informace a HW požadavky}
+\subsection{Licence}
+\begin{itemize}
+    \item {LaTeX Project Public License}
+\end{itemize}
+\subsection{Hardware}
+
+\subsection{Software}
+\begin{itemize}
+\item{Opera GX LVL 3 (core: 80.0.4170.91)}
+\end{itemize}
+
+
+
+\newpage
+\section{Enumerizace hodnot}
+\subsection{Normované enumerizace}
+\subsection{Custom enumerizace}
+
+
+
+\newpage
+\section{Databázová struktura}
+\subsection{ER diagram}
+\includegraphics [width=17cm] {ER.png}
+\subsection{Tabulka Person}
+\subsubsection{Struktura}
+First name, middle name, last name, street, zip, city, mail, phone, sex
+\subsubsection{Provázání tabulky}
+One-to-One s tabulkou Vaccination
+
+\subsection{Tabulka Vaccination}
+\subsubsection{Struktura}
+Name of vaccine(primary key), first dose date, second dose date, booster shot(bool), booster shot date
+\subsubsection{Provázání tabulky}
+One-to-One s tabulkou Person
+
+
+
+\end{document}
