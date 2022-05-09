@@ -1,0 +1,155 @@
+documentclass[12pt,a4paper,notitlepage]{article}
+usepackage[utf8]{inputenc}
+usepackage[czech]{babel}
+usepackage{graphicx}
+graphicspath{ {images} }
+
+begin{document}
+
+title{Databáze očkovaných osob}
+author{ Bubník, Kadlec V., Kadlec D., Wierer }
+date{10. 11. 2021}
+maketitle
+
+begin{abstract}
+Tento dokument byl vypracovaný společně se všemi členy týmu a ověřuje základní znalosti LaTeX{}, databází a projektového řízení.
+
+Tým pracoval samostatně a využíval všechny dostupné materiály na Moodle nebo internetu. Veškeré licenční a právní náležitosti jsou upraveny v tomto dokumentu.
+
+Těm, který není tento dokument určen nemají žádné právo na využití obsahu tohoto dokumentu.
+
+Veškerá data osob a předmětů jsou smyšlená a nezakládají se na skutečnosti.
+end{abstract}
+
+newpage
+
+tableofcontents
+
+newpage
+
+
+section{Popis databáze}
+Databáze obsahuje údaje o očkovaných osobách. Zároveň jsou údaje o očkování prvnídruhou dávkou a popřípadě mají třetí dávku neboli booster shot.
+
+Databáze je vytvořena na jazyce MySQL a využívá veškeré technologické vlastnosti této DB.
+
+
+
+newpage
+section{Licenční informace a HW požadavky}
+subsection{Licence}
+begin{itemize}
+    item {LaTeX Project Public License}
+end{itemize}
+subsection{Hardware}
+
+subsection{Software}
+begin{itemize}
+item{Opera GX LVL 3 (core 80.0.4170.91)}
+end{itemize}
+
+
+
+newpage
+section{Enumerizace hodnot}
+subsection{Normované enumerizace}
+subsection{Custom enumerizace}
+
+
+
+newpage
+section{Databázová struktura}
+subsection{ER diagram}
+includegraphics [width=17cm] {ER diagram.png}
+
+subsection{Tabulka Person}
+subsubsection{Struktura}
+Tato tabulka obsahuje základní údaje o očkovaném.
+begin{table}[h!]
+begin{center}
+caption{Základní údaje}
+label{tabtable1}
+begin{tabular}{lrcc}
+hline
+1 & first name & křestní jméno & varchar(100)
+2 & middle name & prostřední jméno & varchar(75)
+3 & last name & příjmění & varchar(100)
+4 & sex & pohlaví & varchar(5)
+5 & date of birth & datum narození & date
+6 & merital status & rodinný stav & varchar (25)
+end{tabular}
+end{center}
+end{table}
+
+
+subsubsection{Provázání tabulky}
+Provázaní tabulky je One-to-One s tabulkou Vaccination
+
+subsection{Tabulka Vaccination}
+subsubsection{Struktura}
+Tato tublka obsahuje údaje o vakcíně a vakcinaci.
+begin{table}[h!]
+begin{center}
+caption{Vakcinace}
+label{tabtable1}
+begin{tabular}{lrcc}
+hline
+1 & name of vaccination & název vakcíny & varchar(100)
+2 & first dose date & datum první dávky & date
+3 & second dose date & datum druhé dávky & date
+4 & booster shot & revakcinace & bool
+5 & booster shot date & datum revakcinace & date
+end{tabular}
+end{center}
+end{table}
+
+
+subsubsection{Provázání tabulky}
+One-to-One s tabulkou Person
+
+subsection{Tabulka Adress}
+subsubsection{Struktura}
+Tato tabulka obsahuje popis adresy očkovaného.
+begin{table}[h!]
+begin{center}
+caption{Adresa}
+label{tabtable1}
+begin{tabular}{lrcc}
+hline
+1 & city name & název města & varchar(50) 
+2 & street & ulice & varchar(50)
+3 & zip & směrovací číslo & varchar(10)
+4 & desctiptive number & číslo popisné & varchar(10)
+5 & oriantation number & orientační číslo & varchar(35)
+6 & apartment & obytný dům & varchar(25)
+7 & floor & číslo podlaží & varchar(2)
+end{tabular}
+end{center}
+end{table}
+
+
+subsubsection{Provázání tabulky}
+Provázání této tabulky je One-to-many s tabulkou person
+
+subsection{Tabulka Contact}
+subsubsection{Struktura}
+Tato tabulka obsahuje základní kontaktní údaje.
+begin{table}[h!]
+begin{center}
+caption{Zádklaní kontakty}
+label{tabtable1}
+begin{tabular}{lrc}
+hline
+1 & facebook & varchar(100)
+2 & instagram & varchar(100)
+3 & email & varchar(50)
+4 & phone & varchar(15)
+end{tabular}
+end{center}
+end{table}
+
+
+subsubsection{Provázání tabulky}
+Provázání této tabulky je One-to-many s tabulkou person
+
+end{document}
